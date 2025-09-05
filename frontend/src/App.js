@@ -11,12 +11,18 @@ function App() {
     Medium: "#FEF4E6",  // orange
     High: "#F4CCCC",     // red
   };
+
+  const API_BASE_URL =
+    process.env.NODE_ENV === "production"
+      ? "" // same domain as frontend when deployed
+      : "http://localhost:5000";
+
   const analyzeContract = async () => {
     if (!contractText) return alert("Please paste contract text.");
     setLoading(true);
     setResult(null);
     try {
-      const res = await fetch("http://localhost:5000/analyze", {
+      const res = await fetch(`${API_BASE_URL}/analyze`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ contractText }),
