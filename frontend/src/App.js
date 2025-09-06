@@ -62,6 +62,7 @@ function App() {
       window.gtag('event', 'click', { event_label: label });
     }
   };
+
   useEffect(() => {
     if (!loading) {
       setLoadingDots("");
@@ -76,6 +77,7 @@ function App() {
 
     return () => clearInterval(interval); // cleanup
   }, [loading]);
+
   return (
     <div
       style={{
@@ -213,14 +215,14 @@ function App() {
           Contract Area
         </h2>
         {/* File Upload */}
-
-        <p
-        /* change p to input
+        {/*
+        <input
         type="file"
         accept=".pdf,.docx"
         onChange={handleFileUpload}
-        style={{ marginBottom: "20px" }}*/
+        style={{ marginBottom: "20px" }}
         />
+        */}
         {/* Analyze Section */}
         <textarea
           rows={12}
