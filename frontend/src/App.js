@@ -128,7 +128,7 @@ function App() {
       <p style={{ color: "#555", marginBottom: "24px" }}>
         Let AI review your contract and explain risks in plain English.
       </p>
-      {/* Primary CTA */}
+      {/* Primary CTA: contract-input */}
       <button
         onClick={() => {
           trackClick("contract-input");
@@ -151,7 +151,7 @@ function App() {
       >
         Analyze My Contract Now
       </button>
-      {/* Secondary CTA */}
+      {/* Secondary CTA: brief-explaination */}
       <button
         onClick={() => {
           trackClick("brief-explaination");
@@ -240,7 +240,10 @@ function App() {
         <br />
         {/* Analyze Button */}
         <button
-          onClick={() => { trackClick("Analyze Contract"); analyzeContract() }}
+          onClick={() => {
+            trackClick(`Contract length: ${contractText.length}`);
+            trackClick("Analyze Contract"); analyzeContract();
+          }}
           disabled={loading}
           style={{
             backgroundColor: "#4a90e2",
