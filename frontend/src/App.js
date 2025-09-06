@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { coy } from "react-syntax-highlighter/dist/esm/styles/prism";
-
-
+import { useEffect } from "react";
 
 function App() {
   const [contractText, setContractText] = useState("");
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [loadingDots, setLoadingDots] = useState("");
   const severityColors = {
     Low: "#D9EAD3",     // light green
     Medium: "#FEF4E6",  // orange
@@ -57,6 +57,20 @@ function App() {
       alert("Upload failed.");
     }
   };
+  useEffect(() => {
+    if (!loading) {
+      setLoadingDots("");
+      return;
+    }
+
+    let dotCount = 0;
+    const interval = setInterval(() => {
+      dotCount = (dotCount + 1) % 4; // 0,1,2,3
+      setLoadingDots(".".repeat(dotCount));
+    }, 500); // change every 0.5s
+
+    return () => clearInterval(interval); // cleanup
+  }, [loading]);
   return (
     <div
       style={{
@@ -234,7 +248,7 @@ function App() {
           onMouseOver={(e) => (e.target.style.backgroundColor = "#357ABD")}
           onMouseOut={(e) => (e.target.style.backgroundColor = "#4a90e2")}
         >
-          {loading ? "Analyzing..." : "Analyze My Contract Now"}
+          {loading ? `Analyzing${loadingDots}` : "Analyze My Contract Now"}
         </button>
       </div>
 
