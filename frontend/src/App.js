@@ -57,6 +57,11 @@ function App() {
       alert("Upload failed.");
     }
   };
+  const trackClick = (label) => {
+    if (window.gtag) {
+      window.gtag('event', 'click', { event_label: label });
+    }
+  };
   useEffect(() => {
     if (!loading) {
       setLoadingDots("");
@@ -125,9 +130,10 @@ function App() {
       </p>
       {/* Primary CTA */}
       <button
-        onClick={() =>
-          document.getElementById("contract-input").scrollIntoView({ behavior: "smooth" })
-        }
+        onClick={() => {
+          trackClick("contract-input");
+          document.getElementById("contract-input").scrollIntoView({ behavior: "smooth" });
+        }}
         onMouseEnter={(e) => { e.target.style.backgroundColor = "#357ABD"; }}
         onMouseLeave={(e) => { e.target.style.backgroundColor = "#4a90e2"; }}
         style={{
@@ -147,9 +153,10 @@ function App() {
       </button>
       {/* Secondary CTA */}
       <button
-        onClick={() =>
-          document.getElementById("brief-explaination").scrollIntoView({ behavior: "smooth" })
-        }
+        onClick={() => {
+          trackClick("brief-explaination");
+          document.getElementById("brief-explaination").scrollIntoView({ behavior: "smooth" });
+        }}
         onMouseEnter={(e) => {
           e.target.style.backgroundColor = "#4a90e2"; // hover background
           e.target.style.color = "#fff"; // hover text color
@@ -172,9 +179,10 @@ function App() {
       </button>
       {/* Third CTA: FAQ Button */}
       <button
-        onClick={() =>
-          document.getElementById("faq-section").scrollIntoView({ behavior: "smooth" })
-        }
+        onClick={() => {
+          trackClick("faq-section");
+          document.getElementById("faq-section").scrollIntoView({ behavior: "smooth" });
+        }}
         onMouseEnter={(e) => {
           e.target.style.backgroundColor = "#4a90e2"; // hover background
           e.target.style.color = "#fff"; // hover text color
@@ -232,7 +240,7 @@ function App() {
         <br />
         {/* Analyze Button */}
         <button
-          onClick={analyzeContract}
+          onClick={() => { trackClick("Analyze Contract"); analyzeContract() }}
           disabled={loading}
           style={{
             backgroundColor: "#4a90e2",
