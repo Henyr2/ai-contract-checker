@@ -15,7 +15,7 @@ function App() {
   };
   const API_BASE_URL =
     process.env.NODE_ENV === "production"
-      ? "" // same domain as frontend when deployed
+      ? "https://backend-8fz8.onrender.com" // same domain as frontend when deployed
       : "http://localhost:5000";
   const analyzeContract = async () => {
     if (!contractText) return alert("Please paste contract text.");
@@ -80,11 +80,13 @@ function App() {
         AI Contract Checker
       </h1>
       {/* Landing Section */}
-      <h style={{ fontSize: "48px", color: "#222", marginBottom: "10px" }}></h>
-      Spot Risky Contract Clauses in Seconds – No Lawyer Required
+      <h style={{ fontSize: "20px", color: "#222", marginBottom: "10px" }}>
+        Spot Risky Contract Clauses in Seconds – No Lawyer Required
+      </h>
       <p style={{ fontSize: "18px", color: "#555", marginBottom: "10px" }}>
         Paste your contract and let AI highlight potential risks in plain English. Fast, easy, and free to test.
       </p>
+      {/* Bullets */}
       <ul
         style={{
           textAlign: "left",
@@ -101,7 +103,6 @@ function App() {
         <li>✅ Free to Try – No signup, no credit card required.</li>
         <li>✅ Works for Any Contract Type – Employment, freelance, vendor, NDA, and more.</li>
       </ul>
-
       <h2 style={{ fontSize: "28px", marginBottom: "15px" }}>
         Spot Risky Contract Clauses Instantly
       </h2>

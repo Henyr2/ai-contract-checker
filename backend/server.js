@@ -5,6 +5,11 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const OpenAI = require("openai");
 const app = express();
+// File upload
+const multer = require("multer");
+const pdfParse = require("pdf-parse");
+const mammoth = require("mammoth");
+const upload = multer({ dest: "uploads/" });
 
 dotenv.config();
 
@@ -16,12 +21,6 @@ if (!process.env.OPENAI_API_KEY) {
 app.get("/", (req, res) => {
   res.send("Backend is live! Use POST /analyze to send contracts.");
 });
-
-// File upload
-const multer = require("multer");
-const pdfParse = require("pdf-parse");
-const mammoth = require("mammoth");
-const upload = multer({ dest: "uploads/" });
 
 app.post("/upload", upload.single("file"), async (req, res) => {
   try {
