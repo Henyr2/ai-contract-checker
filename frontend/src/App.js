@@ -13,6 +13,7 @@ function App() {
     Medium: "#FEF4E6",  // orange
     High: "#F4CCCC",     // red
   };
+
   const API_BASE_URL =
     process.env.NODE_ENV === "production"
       ? "https://backend-8fz8.onrender.com" // same domain as frontend when deployed
@@ -36,6 +37,7 @@ function App() {
       setLoading(false);
     }
   };
+
   /*const handleFileUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -57,6 +59,7 @@ function App() {
       alert("Upload failed.");
     }
   };*/
+
   const trackClick = (label) => {
     if (window.gtag) {
       window.gtag('event', 'click', { event_label: label });
@@ -90,6 +93,7 @@ function App() {
         fontFamily: "Montserrat, sans-serif",
         backgroundColor: "#f9f9fb",
       }}>
+
       {/* Title */}
       <h1
         style={{
@@ -100,6 +104,7 @@ function App() {
         }}>
         AI Contract Checker
       </h1>
+      
       {/* Landing Section */}
       <h style={{ fontSize: "20px", color: "#222", marginBottom: "10px" }}>
         Spot Risky Contract Clauses in Seconds – No Lawyer Required
@@ -107,6 +112,7 @@ function App() {
       <p style={{ fontSize: "18px", color: "#555", marginBottom: "10px" }}>
         Paste your contract and let AI highlight potential risks in plain English. Fast, easy, and free to test.
       </p>
+      
       {/* Bullets */}
       <ul
         style={{
@@ -130,6 +136,7 @@ function App() {
       <p style={{ color: "#555", marginBottom: "24px" }}>
         Let AI review your contract and explain risks in plain English.
       </p>
+      
       {/* Primary CTA: contract-input */}
       <button
         onClick={() => {
@@ -153,6 +160,7 @@ function App() {
       >
         Analyze My Contract Now
       </button>
+      
       {/* Secondary CTA: brief-explaination */}
       <button
         onClick={() => {
@@ -179,6 +187,7 @@ function App() {
       >
         Not ready yet? Learn how AI can protect you in contracts.
       </button>
+      
       {/* Third CTA: FAQ Button */}
       <button
         onClick={() => {
@@ -207,13 +216,16 @@ function App() {
       >
         Learn More in FAQ
       </button>
+      
       {/* Contract Input Section (anchor for first CTA)*/}
       <div id="contract-input" style={{ textAlign: "center" }}>
+        
         {/*Heading for Analyze section*/}
         <div id="analyze-section" style={{ width: "100%", maxWidth: "900px" }}></div>
         <h2 style={{ fontSize: "36px", marginBottom: "10px", color: "#222" }}>
           Contract Area
         </h2>
+        
         {/* File Upload */}
         {/*
         <input
@@ -223,6 +235,7 @@ function App() {
         style={{ marginBottom: "20px" }}
         />
         */}
+        
         {/* Analyze Section */}
         <textarea
           rows={12}
@@ -233,6 +246,8 @@ function App() {
           style={{
             width: "80%",
             maxWidth: "800px",
+            height: "100%",
+            maxHeight: "500px",
             padding: "15px",
             fontSize: "16px",
             border: "1px solid #ccc",
@@ -242,6 +257,7 @@ function App() {
           }}>
         </textarea>
         <br />
+        
         {/* Analyze Button */}
         <button
           onClick={() => {
@@ -338,6 +354,7 @@ function App() {
         </div>
       )}
 
+      {/* Feedback */}
       <button
         onClick={() => window.open("https://forms.gle/5ZzqXzT5vZrVjfE6A", "_blank")}
         style={{
@@ -387,6 +404,7 @@ function App() {
           decisions.
         </p>
       </div>
+      
       {/* FAQ Section (anchor for third CTA) */}
       <div
         id="faq-section"
