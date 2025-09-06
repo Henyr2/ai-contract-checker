@@ -36,7 +36,7 @@ function App() {
       setLoading(false);
     }
   };
-  const handleFileUpload = async (e) => {
+  /*const handleFileUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
     const formData = new FormData();
@@ -56,7 +56,7 @@ function App() {
       console.error(err);
       alert("Upload failed.");
     }
-  };
+  };*/
   const trackClick = (label) => {
     if (window.gtag) {
       window.gtag('event', 'click', { event_label: label });
@@ -213,11 +213,13 @@ function App() {
           Contract Area
         </h2>
         {/* File Upload */}
-        <input
-          type="file"
-          accept=".pdf,.docx"
-          onChange={handleFileUpload}
-          style={{ marginBottom: "20px" }}
+
+        <p
+        /* change p to input
+        type="file"
+        accept=".pdf,.docx"
+        onChange={handleFileUpload}
+        style={{ marginBottom: "20px" }}*/
         />
         {/* Analyze Section */}
         <textarea
@@ -333,6 +335,35 @@ function App() {
           )}
         </div>
       )}
+
+      <button
+        onClick={() => window.open("https://forms.gle/5ZzqXzT5vZrVjfE6A", "_blank")}
+        style={{
+          marginTop: "20px",
+          backgroundColor: "#4a90e2",
+          color: "#fff",
+          padding: "14px 28px",
+          fontSize: "18px",
+          border: "none",
+          borderRadius: "10px",
+          cursor: "pointer",
+          transition: "all 0.3s ease", // makes the hover smooth
+          boxShadow: "0 4px 6px rgba(0,0,0,0.1)"
+        }}
+        onMouseOver={(e) => {
+          e.target.style.backgroundColor = "#357ABD";
+          e.target.style.transform = "scale(1.05)";
+          e.target.style.boxShadow = "0 6px 12px rgba(0,0,0,0.15)";
+        }}
+        onMouseOut={(e) => {
+          e.target.style.backgroundColor = "#4a90e2";
+          e.target.style.transform = "scale(1)";
+          e.target.style.boxShadow = "0 4px 6px rgba(0,0,0,0.1)";
+        }}
+      >
+        Provide feedback
+      </button>
+
       {/*brief explaination (anchor for second CTA) */}
       <div
         id="brief-explaination"
@@ -403,7 +434,8 @@ function App() {
 
         <h3>6. Can I upload PDF?</h3>
         <p>
-          Yes, the tool accepts **text copy-pasted** and file uploads.
+          Currently, the tool only accepts **text copy-pasted** into the textarea.
+          Future versions may allow file uploads.
         </p>
       </div>
     </div>
