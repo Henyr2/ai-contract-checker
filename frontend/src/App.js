@@ -452,8 +452,7 @@ function App() {
 
         <h3>6. Can I upload PDF?</h3>
         <p>
-          Currently, the tool only accepts **text copy-pasted** into the textarea.
-          Future versions may allow file uploads.
+          Yes, the tool accepts text copy-pasted and file uploads into the textarea.
         </p>
       </div>
     </div>
