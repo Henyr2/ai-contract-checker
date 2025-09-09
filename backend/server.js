@@ -6,10 +6,10 @@ const dotenv = require("dotenv");
 const OpenAI = require("openai");
 const app = express();
 // File upload
-/*const multer = require("multer");
+const multer = require("multer");
 const pdfParse = require("pdf-parse");
 const mammoth = require("mammoth");
-const upload = multer({ dest: "uploads/" });*/
+const upload = multer({ dest: "uploads/" });
 
 dotenv.config();
 
@@ -22,7 +22,7 @@ app.get("/", (req, res) => {
   res.send("Backend is live! Use POST /analyze to send contracts.");
 });
 
-/*app.post("/upload", upload.single("file"), async (req, res) => {
+app.post("/upload", upload.single("file"), async (req, res) => {
   try {
     if (!req.file) {
       return res.status(400).json({ error: "No file uploaded." });
@@ -49,7 +49,7 @@ app.get("/", (req, res) => {
     console.error(err);
     res.status(500).json({ error: "File processing failed." });
   }
-});*/
+});
 
 // AI contract analysis route
 app.use(cors());
