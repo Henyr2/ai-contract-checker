@@ -41,22 +41,28 @@ function App() {
   const handleFileUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
+
     const formData = new FormData();
     formData.append("file", file);
+
     try {
-      const res = await fetch(API_BASE_URL, {
+      const res = await fetch(`${API_BASE_URL}/upload`, {
         method: "POST",
         body: formData,
       });
+
       const data = await res.json();
-      if (data.contractText) {
-        setContractText(data.contractText); // auto-fills textarea
+
+      if (data.contractText && data.contractText.trim().length > 0) {
+        setContractText(data.contractText);  // fill textarea
+      } else if (data.error) {
+        alert("Upload error: " + data.error);
       } else {
-        alert("Failed to extract text.");
+        alert("Failed to extract text from file. Make sure it is a text-based PDF or DOCX.");
       }
     } catch (err) {
-      console.error(err);
-      alert("Upload failed.");
+      console.error("Upload failed:", err);
+      alert("Upload failed. Check backend console for errors.");
     }
   };
 

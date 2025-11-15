@@ -9,7 +9,7 @@ const app = express();
 const multer = require("multer");
 const pdfParse = require("pdf-parse");
 const mammoth = require("mammoth");
-const upload = multer({ dest: "uploads/" });
+const fs = require("fs");
 
 dotenv.config();
 
@@ -22,15 +22,18 @@ app.get("/", (req, res) => {
   res.send("Backend is live! Use POST /analyze to send contracts.");
 });
 
+app.use(cors());
+const upload = multer({ dest: "uploads/" });
+
 app.post("/upload", upload.single("file"), async (req, res) => {
   try {
     if (!req.file) {
       return res.status(400).json({ error: "No file uploaded." });
     }
+    console.log("Uploaded file info:", req.file); // debug
     let extractedText = "";
-    if (req.file.mimetype === "application/pdf") {
-      // PDF file
-      const dataBuffer = require("fs").readFileSync(req.file.path);
+    if (req.file.mimetype === "application/pdf") {// PDF file
+      const dataBuffer = fs.readFileSync(req.file.path);
       const pdfData = await pdfParse(dataBuffer);
       extractedText = pdfData.text;
     } else if (
@@ -42,17 +45,17 @@ app.post("/upload", upload.single("file"), async (req, res) => {
       const result = await mammoth.extractRawText({ buffer: dataBuffer });
       extractedText = result.value;
     } else {
-      return res.status(400).json({ error: "Unsupported file type." });
+      return res.status(400).json({ error: "Unsupported file type. Use PDF or DOCX." });
     }
+    // Return extracted text
     res.json({ contractText: extractedText });
   } catch (err) {
-    console.error(err);
+    console.error("File processing error:", err);
     res.status(500).json({ error: "File processing failed." });
   }
 });
 
 // AI contract analysis route
-app.use(cors());
 app.use(bodyParser.json());
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
@@ -145,5 +148,5 @@ app.post("/analyze", async (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`Contract Checker API running on port ${PORT}`);
+  console.log(`Backend running on port ${PORT}`);
 });
